@@ -1,44 +1,48 @@
 import React from 'react';
-import { Typography, Box, TextField, Button } from '@mui/material';
-import { useStyles } from './useStyles';
+import { Grid, Typography, TextField, Button } from '@mui/material';
 
 export const Login = () => {
 
-    const styles = useStyles();
-
     return (
-        <div className={styles.wrapper}>
-            <div className={styles.wrapper__form_block}>
-                <Typography
-                    variant="h3"
-                    align="center"
-                    mb={5}>
-                    Login
-                </Typography>
-                <Box
-                    component="form"
-                    className={styles.form}
-                >
+        <Grid
+            container
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            style={{ minHeight: "100vh" }}>
+            <Grid item>
+                <Typography variant="h5" color="primary">Login</Typography>
+            </Grid>
+            <Grid item>
+                <Grid
+                    container
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center">
 
                     <TextField
                         required
-                        id="outlined-required"
+                        variant="outlined"
                         label="Login"
-                    /><br />
+                        fullWidth
+                        style={{ marginBottom: "2rem" }} />
 
                     <TextField
                         required
-                        id="outlined-required"
+                        variant="outlined"
                         label="Password"
                         type="password"
-                    /><br />
-                    
+                        fullWidth
+                        style={{ marginBottom: "2rem" }} />
+
                     <Button
-                        variant="contained">
-                        Login
+                        size="large"
+                        variant="contained"
+                        color="primary">
+                        LOGIN
                     </Button>
-                </Box>
-            </div>
-        </div>
+                </Grid>
+            </Grid>
+        </Grid>
     );
 }
