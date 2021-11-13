@@ -1,25 +1,34 @@
 import React from "react";
-import { Box, Grid} from "@mui/material";
+import { Box, Container, Grid, Hidden } from "@mui/material";
 import background from "../../Assets/Image/background.svg";
 
 export const Main = () => {
     return (
-        <>
-            <Box
-                sx={{
-                    height: "100vh",
-                    backgroundImage: `url(${background})`,
-                    backgroundRepeat: "no-repeat",
-                }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-
+        <Container>
+            <Grid
+                container
+                justifyContent="space-between"
+                alignItems="center"
+                style={{ minHeight: "100vh", width: "100%" }}
+            >
+                <Hidden mdDown>
+                    <Grid item
+                        style={{ width: "48%" }}>
+                        <img src={background} alt="background" width="100%" />
                     </Grid>
-                    <Grid item xs={6}>
-                        <div className="asd">asdasd</div>
-                    </Grid>
+                </Hidden>
+                <Grid item
+                    style={{ width: "50%" }}
+                    mdDown={12}>
+                    <Box
+                        style={{
+                            width: "100%",
+                            height: "500px",
+                            backgroundColor: "blue"
+                        }}>
+                    </Box>
                 </Grid>
-            </Box>
-        </>
+            </Grid>
+        </Container>
     );
 }
