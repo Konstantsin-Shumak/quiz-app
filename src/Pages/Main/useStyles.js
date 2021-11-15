@@ -1,6 +1,4 @@
-import {
-    makeStyles
-} from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 
 export const useStyles = makeStyles({
     wrapper: {
@@ -12,10 +10,9 @@ export const useStyles = makeStyles({
         width: "100%",
     },
     container__content_block: {
-        height: "300px",
+        height: "400px",
         padding: "2rem",
-        color: "white",
-        backgroundColor: "#3A6BEA",
+        backgroundColor: "#D3DFFF",
         borderRadius: "10px",
     },
 });
