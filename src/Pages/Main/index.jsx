@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, Grid, Hidden, Button, Typography, TextField } from "@mui/material";
+import { Container, Grid, Hidden, Button, Typography, TextField } from "@mui/material";
 import background from "../../Assets/Image/background.svg";
 import { useStyles } from "./useStyles";
 
@@ -9,32 +9,33 @@ export const Main = () => {
     const styles = useStyles();
 
     return (
-        <Container>
+        <Container lg>
             <Grid
                 container
                 justifyContent="space-between"
                 alignItems="center"
-                style={{ height: "100vh", width: "100%" }}
-            >
+                className={styles.wrapper}>
                 <Hidden mdDown>
                     <Grid item md={6}>
                         <img src={background} alt="background" width="100%" />
                     </Grid>
                 </Hidden>
-                <Grid item
-                    className={styles.container_content}
-                    md={6} xs={12}>
+                <Grid
+                    item
+                    md={6} xs={12}
+                    justifyContent="center"
+                    alignItems="center"
+                    className={styles.container}>
                     <Grid
                         container
-                        direction="column"
                         alignItems="center"
                         justifyContent="space-around"
-                        className={styles.content_block}>
-                        <Grid container
-                            direction="column"
-                            alignItems="center"
+                        className={styles.container__content_block}>
+                        <Grid
+                            container
+                            justifyContent="center"
                             textAlign="center">
-                            <Typography variant="h5" mb={2}>Начать викторину</Typography>
+                            <Typography variant="h4" mb={2}>Начать викторину</Typography>
                             <Typography variant="p">Для того, чтобы продолжить укажите номер викторины и нажмите кнопку "Начать викторину"</Typography>
                         </Grid>
                         <TextField
@@ -42,18 +43,18 @@ export const Main = () => {
                             variant="standard"
                             label="Номер викторины"
                             fullWidth
-                            color="secondary" focused
+                            color="secondary"
                             style={{ background: "#FFF" }} />
 
                         <Button
                             size="large"
                             variant="contained"
-                            color="primary">
+                            color="secondary">
                             Начать викторину
                         </Button>
                     </Grid>
                 </Grid>
             </Grid>
-        </Container>
+        </Container >
     );
 }

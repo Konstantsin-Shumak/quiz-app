@@ -1,18 +1,21 @@
-import { makeStyles } from "@mui/styles";
+import {
+    makeStyles
+} from "@mui/styles";
 
 export const useStyles = makeStyles({
-    container_content: {
+    wrapper: {
+        height: "100vh",
+    },
+    container: {
+        display: "flex",
         height: "100%",
         width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
     },
-    content_block: {
-        height: "80%",
+    container__content_block: {
+        height: "300px",
         padding: "2rem",
         color: "white",
         backgroundColor: "#3A6BEA",
         borderRadius: "10px",
-    }
+    },
 });
