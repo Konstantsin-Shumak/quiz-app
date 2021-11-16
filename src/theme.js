@@ -10,4 +10,7 @@ export const theme = createTheme({
             default: "#F7F0E3"
         }
     },
+    typography:{
+        fontSize: 16,
+    }
 });

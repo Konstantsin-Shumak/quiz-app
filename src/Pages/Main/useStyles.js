@@ -10,7 +10,7 @@ export const useStyles = makeStyles({
         width: "100%",
     },
     container__content_block: {
-        height: "400px",
+        height: "250px",
         padding: "2rem",
         backgroundColor: "#D3DFFF",
         borderRadius: "10px",
