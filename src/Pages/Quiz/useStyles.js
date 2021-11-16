@@ -8,8 +8,5 @@ export const useStyles = makeStyles(theme => ({
         padding: "2rem",
         backgroundColor: "#D3DFFF",
         borderRadius: "10px",
-
     },
-    quiz_block: {
-    }
 }));
