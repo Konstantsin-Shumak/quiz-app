@@ -4,12 +4,7 @@ export const useStyles = makeStyles({
     wrapper: {
         height: "100vh",
     },
-    container: {
-        display: "flex",
-        height: "100%",
-        width: "100%",
-    },
-    container__content_block: {
+    content_block: {
         height: "250px",
         padding: "2rem",
         backgroundColor: "#D3DFFF",

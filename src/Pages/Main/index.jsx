@@ -1,59 +1,61 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Grid, Hidden, Button, Typography, TextField } from "@mui/material";
+import { Grid, Hidden, Button, Typography, TextField, Box } from "@mui/material";
+import logo from "../../Assets/Image/logo.svg";
 import background from "../../Assets/Image/background.svg";
 import { useStyles } from "./useStyles";
 
-
 export const Main = () => {
 
-    const styles = useStyles();
+    const classes = useStyles();
     const navigate = useNavigate();
 
     return (
+
         <Grid
             container
-            justifyContent="space-between"
+            direction="column"
             alignItems="center"
-            className={styles.wrapper}>
-            <Hidden mdDown>
-                <Grid item md={5}>
-                    <img src={background} alt="background" width="100%" />
-                </Grid>
-            </Hidden>
+            sx={{
+                height: "100vh",
+            }}
+        >
             <Grid
-                item
-                md={6} xs={12}
-                justifyContent="center"
-                alignItems="center"
-                className={styles.container}>
-                <Grid
-                    container
-                    alignItems="center"
-                    justifyContent="space-around"
-                    className={styles.container__content_block}>
-                    <Grid
-                        container
-                        direction="column">
-                        <Typography variant="h3" sx={{ m: "0 auto 16px" }}>Начать викторину</Typography>
-                        <Typography>Чтобы продолжить укажите номер опроса.</Typography>
-                    </Grid>
-                    <TextField
-                        required
-                        variant="standard"
-                        label="Номер викторины"
-                        fullWidth
-                        color="primary" />
-
-                    <Button
-                        size="large"
-                        variant="contained"
-                        color="secondary"
-                        onClick={() => navigate("/quiz")}>
-                        Начать викторину
-                    </Button>
-                </Grid>
+                container
+                justifyContent="space-between"
+                sx={{
+                    m: "30px 0",
+                }}
+            >
+                <img src={logo} alt="logo" width="125px" />
+                <Button variant="outlined" sx={{ fontSize: "14px" }}>Login</Button>
             </Grid>
-        </Grid>
+
+            <hr width="100%" color="#ECECE8" />
+
+            <Grid
+                container
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                flexGrow="1"
+            >
+                <Grid md={6}>
+                    <Typography variant="h1">Learn
+                        new concepts
+                        for each question</Typography>
+                    <Typography 
+                    variant="body1"
+                    sx={{
+                        p: "35px 0"
+                    }}>We help you prepare for exams and quizes </Typography>
+                    <Button variant="contained">Start</Button>
+                </Grid>
+
+
+                <img src={background} alt="" />
+
+            </Grid>
+        </Grid >
     );
 }

@@ -2,15 +2,26 @@ import { createTheme } from '@mui/material/styles';
 
 export const theme = createTheme({
     palette: {
-        secondary:{
-            main: "#FBC343",
-            dark: "#ffb91a",
+        primary: {
+            main: "#FCC822"
         },
-        background:{
-            default: "#F7F0E3"
-        }
+        secondary: {
+            main: "#333333",
+        },
     },
-    typography:{
-        fontSize: 16,
-    }
+    typography: {
+        fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            '"Poppins"',
+            'Roboto',
+            '"Helvetica Neue"',
+            'Arial',
+            'sans-serif',
+            '"Apple Color Emoji"',
+          ].join(','),
+          body1:{
+              fontSize: "1rem",
+          }
+    },
 });

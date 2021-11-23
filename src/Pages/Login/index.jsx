@@ -4,20 +4,20 @@ import { useStyles } from "./useStyles";
 
 export const Login = () => {
 
-    const styles = useStyles();
+    const classes = useStyles();
 
     return (
         <Grid
             container
             alignItems="center"
             justifyContent="center"
-            className={styles.container}>
+            className={classes.container}>
             <Grid item>
                 <Grid
                     container
                     alignItems="center"
                     justifyContent="space-around"
-                    className={styles.form}>
+                    className={classes.form}>
                     <Typography
                         variant="h5"
                         color="primary"
