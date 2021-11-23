@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Grid, Hidden, Button, Typography, TextField, Box } from "@mui/material";
 import logo from "../../Assets/Image/logo.svg";
 import background from "../../Assets/Image/background.svg";
+import { QuizRoute } from "../../Routes";
 import { useStyles } from "./useStyles";
 
 export const Main = () => {
@@ -16,16 +17,12 @@ export const Main = () => {
             container
             direction="column"
             alignItems="center"
-            sx={{
-                height: "100vh",
-            }}
+            sx={{ height: "100vh", }}
         >
             <Grid
                 container
                 justifyContent="space-between"
-                sx={{
-                    m: "30px 0",
-                }}
+                sx={{ m: "30px 0", }}
             >
                 <img src={logo} alt="logo" width="125px" />
                 <Button variant="outlined" sx={{ fontSize: "14px" }}>Login</Button>
@@ -44,16 +41,15 @@ export const Main = () => {
                     <Typography variant="h1">Learn
                         new concepts
                         for each question</Typography>
-                    <Typography 
-                    variant="body1"
-                    sx={{
-                        p: "35px 0"
-                    }}>We help you prepare for exams and quizes </Typography>
-                    <Button variant="contained">Start</Button>
+                    <Typography
+                        variant="body1"
+                        sx={{ p: "35px 0" }}>We help you prepare for exams and quizes </Typography>
+                    <Button variant="contained" onClick={() => navigate(QuizRoute)}>Start</Button>
                 </Grid>
 
-
-                <img src={background} alt="" />
+                <Hidden mdDown>
+                    <img src={background} alt="main-background" />
+                </Hidden>
 
             </Grid>
         </Grid >
