@@ -1,14 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Grid, Hidden, Button, Typography, TextField, Box } from "@mui/material";
+import { Grid, Hidden, Button, Typography } from "@mui/material";
 import logo from "../../Assets/Image/logo.svg";
 import background from "../../Assets/Image/background.svg";
 import { QuizRoute } from "../../Routes";
-import { useStyles } from "./useStyles";
 
 export const Main = () => {
 
-    const classes = useStyles();
     const navigate = useNavigate();
 
     return (
@@ -25,6 +23,7 @@ export const Main = () => {
                 sx={{ m: "30px 0", }}
             >
                 <img src={logo} alt="logo" width="125px" />
+                
                 <Button variant="outlined" sx={{ fontSize: "14px" }}>Login</Button>
             </Grid>
 
@@ -37,13 +36,17 @@ export const Main = () => {
                 alignItems="center"
                 flexGrow="1"
             >
+            
                 <Grid md={6}>
+
                     <Typography variant="h1">Learn
                         new concepts
                         for each question</Typography>
+
                     <Typography
                         variant="body1"
                         sx={{ p: "35px 0" }}>We help you prepare for exams and quizes </Typography>
+
                     <Button variant="contained" onClick={() => navigate(QuizRoute)}>Start</Button>
                 </Grid>
 
