@@ -2,8 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Grid, Hidden, Button, Typography } from "@mui/material";
 import logo from "../../Assets/Image/logo.svg";
-import background from "../../Assets/Image/background.svg";
-import { QuizRoute } from "../../Routes";
+import background from "../../Assets/Image/main-background.svg";
+import { LoginRoute, QuizRoute } from "../../Routes";
 
 export const Main = () => {
 
@@ -15,7 +15,7 @@ export const Main = () => {
             container
             direction="column"
             alignItems="center"
-            sx={{ height: "100vh", }}
+            sx={{ minHeight: "100vh", }}
         >
             <Grid
                 container
@@ -23,8 +23,8 @@ export const Main = () => {
                 sx={{ m: "30px 0", }}
             >
                 <img src={logo} alt="logo" width="125px" />
-                
-                <Button variant="outlined" sx={{ fontSize: "14px" }}>Login</Button>
+
+                <Button variant="outlined" sx={{ fontSize: "14px" }} onClick={() => navigate(LoginRoute)}>Login</Button>
             </Grid>
 
             <hr width="100%" color="#ECECE8" />
@@ -36,8 +36,10 @@ export const Main = () => {
                 alignItems="center"
                 flexGrow="1"
             >
-            
-                <Grid md={6}>
+
+                <Grid
+                    md={6}
+                    sx={{ m: "30px 0" }}>
 
                     <Typography variant="h1">Learn
                         new concepts
@@ -45,7 +47,10 @@ export const Main = () => {
 
                     <Typography
                         variant="body1"
-                        sx={{ p: "35px 0" }}>We help you prepare for exams and quizes </Typography>
+                        sx={{
+                            p: "35px 0",
+                            "&::before": { content: '" | "' },
+                        }}>We help you prepare for exams and quizes </Typography>
 
                     <Button variant="contained" onClick={() => navigate(QuizRoute)}>Start</Button>
                 </Grid>
