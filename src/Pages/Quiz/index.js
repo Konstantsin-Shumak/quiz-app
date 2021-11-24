@@ -1,45 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Stepper, Step, StepButton, Button, Box, Typography } from "@mui/material";
 
-const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+const steps = [1, 2, 3, 4, 5];
 
 export const Quiz = () => {
 
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [completed, setCompleted] = React.useState({});
+  const [activeStep, setActiveStep] = useState(0);
+  const [completed, setCompleted] = useState({});
 
-  const totalSteps = () => {
-    return steps.length;
-  };
+  const totalSteps = () => steps.length;
 
-  const completedSteps = () => {
-    return Object.keys(completed).length;
-  };
+  const completedSteps = () => Object.keys(completed).length;
 
-  const isLastStep = () => {
-    return activeStep === totalSteps() - 1;
-  };
+  const isLastStep = () => activeStep === totalSteps() - 1
 
-  const allStepsCompleted = () => {
-    return completedSteps() === totalSteps();
-  };
+  const allStepsCompleted = () => completedSteps() === totalSteps();
 
   const handleNext = () => {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
-        ? // It's the last step, but not all steps have been completed,
-        // find the first step that has been completed
+        ?
         steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+  const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
   const handleStep = (step) => () => {
-    setActiveStep(step);
+    if (activeStep === steps.length &&
+      completed[activeStep])
+      return;
+    else
+      setActiveStep(step);
   };
 
   const handleComplete = () => {
@@ -63,61 +56,84 @@ export const Quiz = () => {
       <Grid
         container
         direction="column"
+        alignItems="center"
+        justifyContent="space-evenly"
         sx={{ height: "580px", boxShadow: 4 }}>
-        <Stepper nonLinear activeStep={activeStep}>
-          {steps.map((label, index) => (
-            <Step key={label} completed={completed[index]}>
-              <StepButton color="inherit" onClick={handleStep(index)}>
-                {label}
-              </StepButton>
-            </Step>
-          ))}
-        </Stepper>
-        <div>
-          {allStepsCompleted() ? (
-            <React.Fragment>
-              <Typography sx={{ mt: 2, mb: 1 }}>
-                All steps completed - you&apos;re finished
-              </Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                <Box sx={{ flex: '1 1 auto' }} />
-                <Button onClick={handleReset}>Reset</Button>
-              </Box>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                <Button
-                  color="inherit"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
-                  Back
+        <Grid sx={{
+          width: 1 / 2,
+        }}>
+          <Stepper nonLinear activeStep={activeStep}>
+            {steps.map((label, index) => (
+              <Step key={label} completed={completed[index]}>
+                <StepButton color="inherit" onClick={handleStep(index)}>
+                  {label}
+                </StepButton>
+              </Step>
+            ))}
+          </Stepper>
+        </Grid>
+        <Grid
+          sx={{
+            width: 1,
+            backgroundColor: "primary.main",
+          }}>
+          <Typography
+            variant="h3"
+            textAlign="center"
+            sx={{
+              color: "#fff",
+              p: "45px 0"
+            }}>Question?</Typography>
+        </Grid>
+        <Grid
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gridRowGap: "1em",
+            gridColumnGap: "1em",
+          }}>
+          <Button variant="contained" size="large" sx={{ height: "85px", width: "150px" }}>Ответ 1</Button>
+          <Button variant="contained" size="large" sx={{ height: "85px", width: "150px" }}>Ответ 2</Button>
+          <Button variant="contained" size="large" sx={{ height: "85px", width: "150px" }}>Ответ 3</Button>
+          <Button variant="contained" size="large" sx={{ height: "85px", width: "150px" }}>Ответ 4</Button>
+        </Grid>
+        <Grid
+          container
+          justifyContent="space-evenly"
+          mt={5}
+          sx={{ width: 1/2 }}>
+          {allStepsCompleted()
+            ?
+            <Button size="large" variant="contained" color="secondary" onClick={handleReset}>Reset</Button>
+            :
+            <>
+              <Button
+                color="inherit"
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                sx={{ mr: 1 }}
+              >
+                Back
+              </Button>
+              <Box sx={{ flex: '1 1 auto' }} />
+              <Button onClick={handleNext} sx={{ mr: 1 }}>
+                Next
+              </Button>
+              {activeStep !== steps.length &&
+                completed[activeStep]
+                ?
+                <></>
+                :
+                <Button variant="contained" onClick={handleComplete}>
+                  {completedSteps() === totalSteps() - 1
+                    ? 'Finish'
+                    : 'Complete Step'}
                 </Button>
-                <Box sx={{ flex: '1 1 auto' }} />
-                <Button onClick={handleNext} sx={{ mr: 1 }}>
-                  Next
-                </Button>
-                {activeStep !== steps.length &&
-                  (completed[activeStep] ? (
-                    <Typography variant="caption" sx={{ display: 'inline-block' }}>
-                      Step {activeStep + 1} already completed
-                    </Typography>
-                  ) : (
-                    <Button onClick={handleComplete}>
-                      {completedSteps() === totalSteps() - 1
-                        ? 'Finish'
-                        : 'Complete Step'}
-                    </Button>
-                  ))}
-              </Box>
-            </React.Fragment>
-          )}
-        </div>
-
+              }
+            </>
+          }
+        </Grid>
       </Grid>
-    </Grid>
+    </Grid >
   );
 }
