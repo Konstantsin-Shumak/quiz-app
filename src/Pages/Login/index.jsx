@@ -22,7 +22,7 @@ export const Login = () => {
                     md={6}
                     sx={{ ...styles.container__left_block }}
                 >
-                    <img src={logo} alt="login-logo" sx={{ ...styles.logo }} /> <br />
+                    <img src={logo} alt="login-logo" width="250px" /> <br />
                     <Typography mb="45px">Welcome  back!<br />Please login/Signup to your account.</Typography>
                     <Box mb={6}>
                         <TextField
@@ -46,7 +46,7 @@ export const Login = () => {
                         justifyContent="center"
                         md={6}
                         sx={{ ...styles.container__right_block }}>
-                        <img src={background} alt="login-background" sx={{ ...styles.right_block__image }} />
+                        <img src={background} alt="login-background" width="250px" />
                     </Grid>
                 </Hidden>
             </Grid>

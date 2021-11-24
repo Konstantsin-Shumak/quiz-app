@@ -4,27 +4,27 @@ import { Grid, Hidden, Button, Typography } from "@mui/material";
 import logo from "../../Assets/Image/logo.svg";
 import background from "../../Assets/Image/main-background.svg";
 import { LoginRoute, QuizRoute } from "../../Routes";
+import { styles } from "./styles";
 
 export const Main = () => {
 
     const navigate = useNavigate();
 
     return (
-
         <Grid
             container
             direction="column"
             alignItems="center"
-            sx={{ minHeight: "100vh", }}
+            sx={{ ...styles.wrapper }}
         >
             <Grid
                 container
                 justifyContent="space-between"
-                sx={{ m: "30px 0", }}
+                sx={{ ...styles.wrapper__header }}
             >
                 <img src={logo} alt="logo" width="125px" />
 
-                <Button variant="outlined" sx={{ fontSize: "14px" }} onClick={() => navigate(LoginRoute)}>Login</Button>
+                <Button variant="outlined" sx={{ ...styles.button_login }} onClick={() => navigate(LoginRoute)}>Login</Button>
             </Grid>
 
             <hr width="100%" color="#ECECE8" />
@@ -39,7 +39,7 @@ export const Main = () => {
 
                 <Grid
                     md={6}
-                    sx={{ m: "30px 0" }}>
+                    sx={{ ...styles.information }}>
 
                     <Typography variant="h1">Learn
                         new concepts
@@ -47,10 +47,7 @@ export const Main = () => {
 
                     <Typography
                         variant="body1"
-                        sx={{
-                            p: "35px 0",
-                            "&::before": { content: '" | "' },
-                        }}>We help you prepare for exams and quizes </Typography>
+                        sx={{ ...styles.info_p }}>We help you prepare for exams and quizes </Typography>
 
                     <Button variant="contained" onClick={() => navigate(QuizRoute)}>Start</Button>
                 </Grid>
