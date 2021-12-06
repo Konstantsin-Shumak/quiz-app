@@ -37,11 +37,11 @@ export const Main = () => {
                 flexGrow="1"
             >
 
-                <Grid
+                <Grid item
                     md={6}
                     sx={{ ...styles.information }}>
 
-                    <Typography variant="h1">Learn
+                    <Typography variant="h3">Learn
                         new concepts
                         for each question</Typography>
 

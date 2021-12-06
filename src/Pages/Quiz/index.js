@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Stepper, Step, StepButton, Button, Box, Typography } from "@mui/material";
+import { fetchQuestionsAsync } from "../../Services/fetchQuestionsAsync";
 import { styles } from "./styles";
 
 const steps = [1, 2, 3, 4, 5];
@@ -8,6 +9,12 @@ export const Quiz = () => {
 
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [currentQuestion, setCurrentQuestion] = useState("");
+  const [questions, setQuestions] = useState([]);
+  const [points, setPoints] = useState(0);
 
   const totalSteps = () => steps.length;
 
@@ -48,6 +55,16 @@ export const Quiz = () => {
     setCompleted({});
   };
 
+  useEffect(() => {
+    setIsLoading(true);
+    fetchQuestionsAsync()
+      .then(questions => {
+        setQuestions(questions);
+        setCurrentQuestion(questions[0]);
+      })
+      .finally(() => setIsLoading(false))
+  }, []);
+
   return (
     <Grid
       container
@@ -71,20 +88,25 @@ export const Quiz = () => {
             ))}
           </Stepper>
         </Grid>
-        <Grid
-          sx={{ ...styles.question_block }}>
-          <Typography
-            variant="h3"
-            textAlign="center"
-            sx={{ ...styles.question_title }}>Question?</Typography>
-        </Grid>
-        <Grid
-          sx={{ ...styles.answers__block }}>
-          <Button variant="contained" size="large" sx={{ ...styles.anwer_button }}>Ответ 1</Button>
-          <Button variant="contained" size="large" sx={{ ...styles.anwer_button }}>Ответ 2</Button>
-          <Button variant="contained" size="large" sx={{ ...styles.anwer_button }}>Ответ 3</Button>
-          <Button variant="contained" size="large" sx={{ ...styles.anwer_button }}>Ответ 4</Button>
-        </Grid>
+        {!isLoading &&
+          <>
+            <Grid
+              sx={{ ...styles.question_block }}>
+              <Typography
+                variant="h4"
+                textAlign="center"
+                sx={{ ...styles.question_title }}>{currentQuestion.questionText}</Typography>
+            </Grid>
+            <Grid
+              sx={{ ...styles.answers__block }}>
+              {currentQuestion.answerOptions?.map((answer, index) =>
+                <Button key={index}
+                  variant="contained"
+                  size="large"
+                  sx={{ ...styles.answer_button }}>{answer.answerText}</Button>)}
+            </Grid>
+          </>
+        }
         <Grid
           container
           justifyContent="space-evenly"

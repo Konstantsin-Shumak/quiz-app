@@ -23,7 +23,7 @@ export const styles = {
         gridRowGap: "1em",
         gridColumnGap: "1em",
     },
-    anwer_button: {
+    answer_button: {
         m: "0 auto",
         height: "85px",
         width: "150px",
