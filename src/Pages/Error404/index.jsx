@@ -10,9 +10,7 @@ export const Error404 = () => {
     return (
         <>
             <GlobalStyles
-                styles={{
-                    body: { backgroundColor: "#0414a7" }
-                }}
+                styles={{ body: { backgroundColor: "#0414a7" } }}
             />
             <div className={styles.page}>
                 <main className={styles.container}>

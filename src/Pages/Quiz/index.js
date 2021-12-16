@@ -53,15 +53,21 @@ export const Quiz = () => {
     setCompleted({});
   }, []);
 
+  const mixQuestions = useCallback((questions) => {
+    questions.sort(() =>
+      Math.random() - 0.5).map(question =>
+        question.answerOptions.sort(() => Math.random() - 0.5))
+  }, []);
+
   useEffect(() => {
     setIsLoading(true);
     fetchQuestionsAsync()
       .then(questions => {
-        console.log(questions)
+        mixQuestions(questions);
         setQuestions(questions);
       })
       .finally(() => setIsLoading(false))
-  }, []);
+  }, [mixQuestions]);
 
   return (
     <Grid
