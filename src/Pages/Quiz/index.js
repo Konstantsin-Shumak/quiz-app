@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Grid, Stepper, Step, StepButton, Button, Box, Typography } from "@mui/material";
 import { fetchQuestionsAsync } from "../../Services/fetchQuestionsAsync";
 import { styles } from "./styles";
@@ -25,7 +25,7 @@ export const Quiz = () => {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ?
-        questions.findIndex((step, i) => !(i in completed))
+        questions.findIndex((_, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
   }, [isLastStep, allStepsCompleted, questions, completed, activeStep]);
@@ -45,6 +45,7 @@ export const Quiz = () => {
     newCompleted[activeStep] = true;
     if (isCorrect) setPoints(prev => prev + 1)
     setCompleted(newCompleted);
+    console.log(completed)
     handleNext();
   }, [activeStep, completed, handleNext]);
 
@@ -54,11 +55,15 @@ export const Quiz = () => {
     setPoints(0);
   }, []);
 
-  const mixQuestions = useCallback((questions) => {
+  const getResult = useMemo(() => `${points} of ${questions.length}`, [points, questions]);
+
+  const isComplite = useMemo(() => (activeStep !== questions.length && completed[activeStep]), [activeStep, questions, completed]);
+
+  const mixQuestions = useCallback((questions) =>
     questions.sort(() =>
       Math.random() - 0.5).map(question =>
         question.answerOptions.sort(() => Math.random() - 0.5))
-  }, []);
+    , []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -87,8 +92,7 @@ export const Quiz = () => {
           <Stepper nonLinear activeStep={activeStep}>
             {questions.map((label, index) => (
               <Step key={label} completed={completed[index]}>
-                <StepButton color="inherit" onClick={handleStep(index)}>
-                </StepButton>
+                <StepButton color="inherit" onClick={handleStep(index)} />
               </Step>
             ))}
           </Stepper>
@@ -103,7 +107,7 @@ export const Quiz = () => {
                 textAlign="center"
                 sx={{ ...styles.question_title }}>
                 {allStepsCompleted() ?
-                  `${points} / ${questions.length}`
+                  getResult
                   :
                   questions[activeStep]?.questionText}
               </Typography>
@@ -113,11 +117,16 @@ export const Quiz = () => {
               sx={{ ...styles.answers__block }}>
               {questions[activeStep]?.answerOptions?.map((answer, index) =>
                 <Button
+                  {...(isComplite && { disabled: true })}
                   key={index}
-                  onClick={() => handleComplete(answer.isCorrect)}
                   variant="contained"
                   size="large"
-                  sx={{ ...styles.answer_button }}>{answer.answerText}</Button>)}
+                  sx={{ ...styles.answer_button }}
+                  onClick={() => handleComplete(answer.isCorrect)}
+                >
+                  {answer.answerText}
+                </Button>
+              )}
             </Grid>
           </>
         }
@@ -128,7 +137,14 @@ export const Quiz = () => {
           sx={{ ...styles.navigations_block }}>
           {allStepsCompleted()
             ?
-            <Button size="large" variant="contained" color="secondary" onClick={handleReset}>Reset</Button>
+            <Button
+              size="large"
+              variant="contained"
+              color="secondary"
+              onClick={handleReset}
+            >
+              Reset
+            </Button>
             :
             <>
               <Button
