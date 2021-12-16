@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Grid, Stepper, Step, StepButton, Button, Box, Typography } from "@mui/material";
 import { fetchQuestionsAsync } from "../../Services/fetchQuestionsAsync";
 import { styles } from "./styles";
@@ -17,7 +17,7 @@ export const Quiz = () => {
 
   const completedSteps = useCallback(() => Object.keys(completed).length, [completed]);
 
-  const isLastStep = useMemo(() => activeStep === totalSteps() - 1, [activeStep, totalSteps]);
+  const isLastStep = useCallback(() => activeStep === totalSteps() - 1, [activeStep, totalSteps]);
 
   const allStepsCompleted = useCallback(() => completedSteps() === totalSteps(), [completedSteps, totalSteps]);
 
@@ -51,6 +51,7 @@ export const Quiz = () => {
   const handleReset = useCallback(() => {
     setActiveStep(0);
     setCompleted({});
+    setPoints(0);
   }, []);
 
   const mixQuestions = useCallback((questions) => {
